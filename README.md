@@ -1,8 +1,9 @@
 # CTkPdfium
 
-![Python 3.11+](https://img.shields.io/badge/python-3.11%20|%203.12%20|%203.13%20|%203.14-blue)
-![License: MIT](https://img.shields.io/badge/license-MIT-green)
-![Platform: Linux | macOS | Windows](https://img.shields.io/badge/platform-Linux%20|%20macOS%20|%20Windows-lightgrey)
+[![PyPI](https://img.shields.io/pypi/v/ctkpdfium)](https://pypi.org/project/ctkpdfium/)
+[![Python versions](https://img.shields.io/pypi/pyversions/ctkpdfium?logo=python&logoColor=white)](https://pypi.org/project/ctkpdfium/)
+[![License](https://img.shields.io/pypi/l/ctkpdfium)](https://github.com/sherpya/ctkpdfium/blob/master/LICENSE)
+[![CI](https://github.com/sherpya/ctkpdfium/actions/workflows/release.yml/badge.svg)](https://github.com/sherpya/ctkpdfium/actions/workflows/release.yml)
 
 An asynchronous PDF viewer for CustomTkinter, powered by PDFium. Pages fit the
 available width and scroll continuously. Only visible pages and their immediate
@@ -146,30 +147,11 @@ The public navigation methods from the earlier implementation remain available;
 the widget now derives from CTkFrame, not CTkScrollableFrame, and private
 scrollable-frame attributes are no longer available.
 
-## PyPI publishing configuration
-
-The release workflow builds one sdist and one `py3-none-any` wheel, then
-installs that wheel on Linux, Windows and macOS (CPython 3.11–3.14). Those
-jobs pull pypdfium2's platform-specific PDFium binary, check that it loads, and
-run the test suite (with `xvfb-run` on Linux).
-
-Configure a Trusted Publisher for the `ctkpdfium` project using owner
-`sherpya`, repository `ctkpdfium`, workflow `release.yml` and GitHub
-environment `ctkpdfium`. For a project that does not exist yet, register a
-[pending publisher](https://pypi.org/manage/account/publishing/).
-
-The workflow checks metadata with `twine check --strict` before upload and
-skips already uploaded files when retrying a partial release. PyPI files are
-immutable: increment `VERSION` for changed code or metadata. Release metadata
-(description, summary) is taken from the first file uploaded for that version.
-
-```sh
-python -m pip install --upgrade build twine
-python -m build
-python -m twine check --strict dist/*
-```
-
 ## Checks
+
+The release workflow installs the built wheel on Linux, Windows and macOS
+(CPython 3.11–3.14), checks that pypdfium2's native binary loads, and runs
+this suite (`xvfb-run` on Linux).
 
 ```sh
 uv run python -m unittest discover -s tests -v
@@ -208,4 +190,6 @@ The successful run prints `Standalone PDFium render OK: 1 page(s)`. Check that
 `packaging_probe.dist/pypdfium2_raw/libpdfium.so` is present. This tests the
 packaged viewer and its native library; it does not sign with a smart card.
 
-License: MIT. Copyright (c) Gianluigi Tiesi <sherpya@gmail.com>.
+## License
+
+MIT. See `LICENSE` for details.
